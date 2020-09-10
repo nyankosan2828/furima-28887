@@ -25,7 +25,6 @@
 
 - has_many: items,    dependent: :destroy
 - has_many: comments, dependent: :destroy
-- has_one:  shopping_addresses, dependent: :destroy
 
 
 ## shopping_addresses テーブル
@@ -37,12 +36,10 @@
 | city                         | string     | null: false                    |
 | building_name                | string     |                                |
 | phone_number                 | string     | unique: true                   |
-| user                         | references | null: false, foreign_key: true |
 | purchase                     | references | null: false, foreign_key: true |
 
 ## Association
 
-- belongs_to: user
 - has_one: purchase
 
 ## comments テーブル
