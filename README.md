@@ -20,7 +20,6 @@
 | first_name_kana  | string | null: false               |
 | family_name_kana | string | null: false               |
 | birthday         | date   | null: false               |
-| introduction     | text   |                           |
 
 ### Association
 
@@ -44,6 +43,7 @@
 ## Association
 
 - belongs_to: user
+- has_one: purchase
 
 ## comments テーブル
 
@@ -65,7 +65,6 @@
 | name                         | string     | null: false                    |
 | description                  | text       | null: false                    |
 | price                        | integer    | null: false                    |
-| brand                        | text       | null: false                    |
 | product_status_id            | integer    | null: false                    |
 | postage_payer_id             | integer    | null: false                    |
 | prefecture_code_id           | integer    | null: false                    |
@@ -76,8 +75,8 @@
 ## Association
 
 - has_many: comments, dependent: :destroy
-- belongs_to: category
 - belongs_to: user
+- has_one: purchase
 
 ## purchase
 
@@ -89,7 +88,7 @@
 ## Association
 
 - belongs_to: user, dependent: :destroy
-- has_one: item, dependent: :destroy
+- belongs_to: item, dependent: :destroy
 - has_one: shopping_address, dependent: :destroy
 
 ## active_hash
