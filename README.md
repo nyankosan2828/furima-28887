@@ -36,10 +36,10 @@
 | post_code                    | string     | null: false                    |
 | prefecture_code              | integer    | null: false                    |
 | city                         | string     | null: false                    |
-| house_number                 | string     | null: false                    |
 | building_name                | string     |                                |
 | phone_number                 | string     | unique: true                   |
 | user                         | references | null: false, foreign_key: true |
+| purchase                     | references | null: false, foreign_key: true |
 
 ## Association
 
@@ -78,6 +78,19 @@
 - has_many: comments, dependent: :destroy
 - belongs_to: category
 - belongs_to: user
+
+## purchase
+
+|    Column        |   Type     |      Options                   |
+| -----------------| -----------| ------------------------------ |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
+
+## Association
+
+- belongs_to: user, dependent: :destroy
+- has_one: item, dependent: :destroy
+- has_one: shopping_address, dependent: :destroy
 
 ## active_hash
 
