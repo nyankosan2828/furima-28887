@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe '出品機能' do
     before do
-      user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item, user_id: user.id)
       @item.image = fixture_file_upload('public/images/test-500x500.png')
     end
