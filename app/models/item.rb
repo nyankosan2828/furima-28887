@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-    vilidates :image
+    validates :image
     validates :name
     validates :description
     validates :price, numericality:
