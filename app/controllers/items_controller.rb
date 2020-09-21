@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
  # トップページ
  def index
+  @items = Item.all.order(created_at: "DESC")
  end
 
  #商品出品ページ
