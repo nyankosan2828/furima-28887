@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
  # トップページ
  def index
+  @items = Item.all.order(created_at: 'DESC')
  end
 
  #商品出品ページ
@@ -27,6 +28,6 @@ class ItemsController < ApplicationController
  end
 
  def item_params
-   params.require(:item).permit(:image, :name, :description, :price, :product_cost_id, :postage_payer_id, :prefecture_code_id, :handling_time_id, :category_id).merge(user_id: current_user.id)
+   params.require(:item).permit(:image, :name, :description, :price, :product_status_id, :postage_payer_id, :prefecture_code_id, :handling_time_id, :category_id).merge(user_id: current_user.id)
  end
 end
