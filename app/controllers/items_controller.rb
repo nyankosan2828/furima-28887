@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :move_to_session, except: [:index]
+  before_action :move_to_session, except: [:index, :show]
+  before_action :set_item, only: [:show]
 
  # トップページ
  def index
@@ -21,12 +22,22 @@ class ItemsController < ApplicationController
    end
  end
 
+ # 商品詳細ページ
+ def show
+ end
+
+
  private
 
  def move_to_session
    redirect_to new_user_session_path unless user_signed_in?
  end
 
+ # idに紐づく商品データの取得
+ def set_item
+   @item = Item.find(params[:id])
+ end
+ 
  def item_params
    params.require(:item).permit(:image, :name, :description, :price, :product_status_id, :postage_payer_id, :prefecture_code_id, :handling_time_id, :category_id).merge(user_id: current_user.id)
  end
