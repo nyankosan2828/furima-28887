@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe '出品機能' do
     before do
-      @item = FactoryBot.build(:item, user_id: user.id)
-      @item.image = fixture_file_upload('public/images/test-500x500.png')
+      @item = FactoryBot.build(:item)
+      @item.image = fixture_file_upload('app/assets/images/flag.png')
     end
 
     it '全ての値が正しく入力されていれば登録できる' do
@@ -66,7 +66,7 @@ RSpec.describe Item, type: :model do
     end
 
     it 'priceが¥300~¥9,999,999の間でなければ出品できない' do
-      @item.price = 200
+      @item.price = 10
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
