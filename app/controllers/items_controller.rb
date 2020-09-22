@@ -28,15 +28,13 @@ class ItemsController < ApplicationController
 
  # 商品編集ページ
  def edit
-    unless current_user == @item.user
-      redirect_to root_path
+      redirect_to root_path unless current_user  == @item.user
     end
  end
 
  # 商品情報の更新
  def update
-   if @item.update(item_params)
-       render action: :show
+       render action: :show if @item.update(item_params)
    end
  end
 
