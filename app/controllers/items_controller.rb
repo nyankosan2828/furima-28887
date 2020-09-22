@@ -28,6 +28,9 @@ class ItemsController < ApplicationController
 
  # 商品編集ページ
  def edit
+    unless current_user == @item.user
+      redirect_to root_path
+    end
  end
 
  private
