@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_session, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit]
+  before_action :set_item, only: [:show, :edit, :update]
 
  # トップページ
  def index
@@ -31,6 +31,13 @@ class ItemsController < ApplicationController
     unless current_user == @item.user
       redirect_to root_path
     end
+ end
+
+ # 商品情報の更新
+ def update
+   if @item.update(item_params)
+       render action: :show
+   end
  end
 
  private
