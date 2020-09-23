@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_session, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
  # トップページ
  def index
@@ -39,7 +39,16 @@ class ItemsController < ApplicationController
     render :edit
   end
 end
- 
+
+# 商品の削除
+def destroy
+  redirect_to root_path unless current_user == @item.user
+  if @item.destroy
+    redirect_to root_path
+  else
+    render 'edit'
+  end
+end
 
  private
 
