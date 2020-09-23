@@ -43,7 +43,11 @@ end
 # 商品の削除
 def destroy
   redirect_to root_path unless current_user == @item.user
-  redirect_to root_path if @item.destroy
+  if @item.destroy
+    redirect_to root_path
+  else
+    render 'edit'
+  end
 end
 
  private
