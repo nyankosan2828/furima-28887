@@ -33,8 +33,12 @@ class ItemsController < ApplicationController
 
  # 商品情報の更新
  def update
-   render action: :show if @item.update(item_params)
- end
+  if @item.update(item_params)
+    redirect_to item_path(item_params)
+  else
+    render :edit
+  end
+end
  
 
  private
