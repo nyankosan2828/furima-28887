@@ -1,13 +1,32 @@
 function calculation() {
-  const price = document.getElementById('item-price');
-  const fee = document.getElementById('add-tax-price');
-  const profit = document.getElementById('profit');
+  const itemPrice = document.getElementById("item-price");
+  const addTax = document.getElementById("add-tax-price");
+  const profit = document.getElementById('profit') ;
 
-  price.addEventListener('input', function() {
-    const inputPrice = price.value;
-    fee.innerHTML = `${Math.floor(inputPrice * 0.1)}`;
-    profit.innerHTML = `${inputPrice - fee.innerHTML}`;
-  });
-};
+  const inputPrice = function() {
+    const priceContent = itemPrice.value;
 
-setInterval(calculation, 1000);
+    if(priceContent >= 300 && priceContent <= 9999999){
+      let tax = priceContent * 0.1
+      let taxContent = Math.round(tax);
+      let profitContent = priceContent - taxContent
+      let afterTaxContent = taxContent.toLocaleString();
+      let afterprofitContent = profitContent.toLocaleString();
+      addTax.textContent = afterTaxContent;
+      profit.textContent = afterprofitContent;
+
+    } else {
+      let taxContent = '0';
+      let profitContent = '0';
+      addTax.textContent = taxContent;
+      profit.textContent = profitContent;
+    } 
+  }
+
+  value =  inputPrice.innerHTML
+
+  itemPrice.addEventListener('click', inputPrice);
+}
+window.addEventListener('click', calculation);
+
+// innerHTMLどこに何を追加するか
