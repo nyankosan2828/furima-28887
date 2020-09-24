@@ -30,7 +30,7 @@ RSpec.describe PurchaseShopping, type: :model do
     it 'prefecture_codeが空では保存できないこと' do
       @purchase_shopping.prefecture_code = nil
       @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include('Prefecture code select')
+      expect(@purchase_shopping.errors.full_messages).to include("Post code Input correctly", "Token can't be blank", "Prefecture code is not selected")
     end
 
     it 'cityが空では保存できないこと' do
