@@ -7,7 +7,6 @@ class PurchaseShopping
     validates :city
     validates :address
     validates :phone_number, length: { maximum: 11 }
-    validates :token
   end
 
   validates :prefecture_code, numericality: { other_than: 0, message: 'is not selected' }
