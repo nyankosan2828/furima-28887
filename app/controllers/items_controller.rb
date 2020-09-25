@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
    if @item.save
      redirect_to root_path
    else
-    render action: :new
+    render :new
    end
  end
 
@@ -46,7 +46,7 @@ def destroy
   if @item.destroy
     redirect_to root_path
   else
-    render 'edit'
+    render 'show'
   end
 end
 

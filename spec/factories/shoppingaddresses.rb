@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :product_status do
+  factory :shoppingaddress do
   end
 end

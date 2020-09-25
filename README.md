@@ -1,12 +1,4 @@
 # README
-# テーブル設計
-
-## 機能の洗い出し
-
-## 新規会員登録、ログオンをすると商品の購入、出品ができます。
-## 新規会員登録及びログイン済でない方も商品の一覧や詳細を閲覧可能です。
-## 決済方法は、ご自身のクレジットカードを登録して購入可能です。
-
 
 ## users テーブル
 
@@ -25,35 +17,6 @@
 
 - has_many: items,    dependent: :destroy
 - has_many: comments, dependent: :destroy
-
-
-## shopping_addresses テーブル
-
-|    Column                    |   Type     |      Options                   |
-| -----------------------------| -----------| ------------------------------ |
-| post_code                    | string     | null: false                    |
-| prefecture_code              | integer    | null: false                    |
-| city                         | string     | null: false                    |
-| building_name                | string     |                                |
-| phone_number                 | string     | unique: true                   |
-| purchase                     | references | null: false, foreign_key: true |
-
-## Association
-
-- has_one: purchase
-
-## comments テーブル
-
-|    Column        |   Type     |      Options                   |
-| -----------------| -----------| ------------------------------ |
-| comment          | text       | null: false                    |
-| user             | references | null: false, foreign_key: true |
-| item             | references | null: false, foreign_key: true |
-
-## Association
-
-- belongs_to: user
-- belongs_to: item
 
 ## items テーブル
 
@@ -87,6 +50,24 @@
 - belongs_to: user, dependent: :destroy
 - belongs_to: item, dependent: :destroy
 - has_one: shopping_address, dependent: :destroy
+
+## shopping_addresses テーブル
+
+|    Column                    |   Type     |      Options                   |
+| -----------------------------| -----------| ------------------------------ |
+| post_code                    | string     | null: false                    |
+| prefecture_code              | integer    | null: false                    |
+| city                         | string     | null: false                    |
+| address                      | string     | null: false                    |
+| building_name                | string     |                                |
+| phone_number                 | string     | null; false                    |
+| item                         | references | null: false, foreign_key: true |
+| purchase                     | references | null: false, foreign_key: true |
+
+## Association
+
+- belongs_to: item
+- belongs_to: purchase
 
 ## active_hash
 
