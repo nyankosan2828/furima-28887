@@ -1,60 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseShopping, type: :model do
-  describe '購入情報保存機能' do
+  describe '購入情報の保存' do
     before do
       @purchase_shopping = FactoryBot.build(:purchase_shopping)
     end
 
-    it '全ての値が正しく入力されていれば保存できる' do
+    it 'すべての値が正しく入力されていれば保存できること' do
       expect(@purchase_shopping).to be_valid
     end
-
-    it 'building_nameが空でも保存できる' do
+    it 'cityが空だと保存できないこと' do
+      @purchase_shopping.city = ""
+      @purchase_shopping.valid?
+      expect(@purchase_shopping.errors.full_messages).to include("City can't be blank", "City can't be blank")
+    end
+    it 'addressが空だと保存できないこと' do
+      @purchase_shopping.address = ""
+      @purchase_shopping.valid?
+      expect(@purchase_shopping.errors.full_messages).to include("Address can't be blank", "Address can't be blank")
+    end
+    it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+      @purchase_shopping.post_code = '1234567'
+      @purchase_shopping.valid?
+      expect(@purchase_shopping.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+    end
+    it 'prefecture_codeを選択していないと保存できないこと' do
+      @purchase_shopping.prefecture_code = 0
+      @purchase_shopping.valid?
+      expect(@purchase_shopping.errors.full_messages).to include('Prefecture code must be other than 0')
+    end
+    it 'building_nameは空でも保存できること' do
       @purchase_shopping.building_name = nil
       expect(@purchase_shopping).to be_valid
     end
-
-    it 'post_codeが空では保存できないこと' do
-      @purchase_shopping.post_code = nil
+    it 'phone_numberが全角数字だと保存できないこと' do
+      @purchase_shopping.phone_number = '５０００'
       @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include("Post code can't be blank", 'Post code Input correctly')
+      expect(@purchase_shopping.errors.full_messages).to include('Phone number is invalid. Input half-width characters.')
     end
-
-    it 'post_codeにハイフンが無ければ保存できないこと' do
-      @purchase_shopping.post_code = '1234567'
-      @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include('Post code Input correctly')
-    end
-
-    it 'prefecture_codeが空では保存できないこと' do
-      @purchase_shopping.prefecture_code = nil
-      @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include("Post code Input correctly", "Token can't be blank", "Prefecture code is not selected")
-    end
-
-    it 'cityが空では保存できないこと' do
-      @purchase_shopping.city = nil
-      @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include("City can't be blank")
-    end
-
-    it 'addressが空では保存できないこと' do
-      @purchase_shopping.address = nil
-      @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include("Address can't be blank")
-    end
-
-    it 'phone_numberが空では保存できないこと' do
-      @purchase_shopping.phone_number = nil
-      @purchase_shopping.valid?
-      expect(@purchase_shopping.errors.full_messages).to include("Phone number can't be blank")
-    end
-
-    it 'phone_numberが12桁以上では保存できないこと' do
-      @purchase_shopping.phone_number = '123456789012'
+    it 'phone_numberが12桁以上だと保存できないこと' do
+      @purchase_shopping.phone_number = '012345678912'
       @purchase_shopping.valid?
       expect(@purchase_shopping.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+    end
+    it 'phone_numberに-があると保存できないこと' do
+      @purchase_shopping.phone_number = '01234-8912'
+      @purchase_shopping.valid?
+      expect(@purchase_shopping.errors.full_messages).to include('Phone number is invalid. Input half-width characters.')
     end
   end
 end
