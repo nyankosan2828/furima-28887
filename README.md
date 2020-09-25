@@ -80,3 +80,5 @@
 ## active_storage
 
 - item_images
+
+
